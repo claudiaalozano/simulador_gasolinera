@@ -1,3 +1,4 @@
+
 import time
 import threading
 import queue
@@ -10,7 +11,7 @@ class Gasolinera():
         self.pila = [True] * n_surtidores
         self.n_surtidores = n_surtidores
         self.tiempo_repostaje = 0
-        self.tiempo_pago = 3
+        self.tiempo_pago = 0
 
     def surtidor(self):
          for surtidor in self.surtidores:
@@ -30,15 +31,13 @@ class Gasolinera():
                             self.tiempo_repostaje = random.randint(10, 15)
                             print(f'Coche {coche} ha llegado al surtidor {surtidor}. Tiempo de repostaje: {self.tiempo_repostaje} minutos.')
                             
-                            self.tiempo_pago = 3
+                            self.tiempo_pago = 0
                             surtidor = self.pila.index(False)
                             print(f'Coche {coche} ha terminado de repostar en el surtidor {surtidor}. Pasando al tiempo de pago.')
                     
                             
                         
-                        elif not self.cola and False in self.pila and self.tiempo_repostaje == 0 and self.tiempo_pago > 0:
-                            self.tiempo_pago -= 1
-                
+                        
                             if self.tiempo_pago == 0:
                                 surtidor = self.pila.index(False)
                                 self.pila[surtidor] = True
